@@ -1,6 +1,17 @@
 import libpluto from "./libpluto.js";
 
-export const mod = await libpluto();
+const opts = {};
+if (typeof __webpack_require__ == "function")
+{
+	// Doing this instantiateWasm stuff takes ~100ms, so I'm not doing it by default, but it's needed for webpack.
+	const wasmBinaryPromise = import("./libpluto-wasm-inlined.js");
+	opts.instantiateWasm = (imports, onSuccess) => {
+		return wasmBinaryPromise.then(wasmBinary => {
+			WebAssembly.instantiate(wasmBinary.data, imports).then(arg => onSuccess(arg.instance, arg.module));
+		});
+	};
+}
+export const mod = await libpluto(opts);
 
 export const malloc = mod.cwrap("malloc", "int", ["int"]);
 export const luaL_newstate = mod.cwrap("luaL_newstate", "int", []);

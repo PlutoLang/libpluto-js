@@ -1,0 +1,10 @@
+local bin = io.contents("libpluto.wasm")
+
+--[[local arr = {}
+for i = 1, #bin do
+	arr:insert(bin:byte(i))
+end
+io.contents("libpluto-wasm-inlined.js", "module.exports={data:new Uint8Array(["..arr:concat(",").."])}")]]
+
+local { base64 } = require "*"
+io.contents("libpluto-wasm-inlined.js", 'module.exports={data:Uint8Array.from(atob("'..base64.encode(bin)..'"), c => c.charCodeAt(0))}')
