@@ -1,0 +1,10 @@
+{
+	"name": "libpluto",
+	"version": "0.11.0",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/PlutoLang/npm-libpluto.git"
+	},
+	"type": "commonjs",
+	"main": "index.mjs"
+}
