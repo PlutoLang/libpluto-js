@@ -21,13 +21,13 @@ console.log(lua_tolstring(L, -1, 0));
 This library should work as-is with webpack (although it will raise a warning about the file size), but your webpack config needs to specify that the Emscripten code doesn't need shims for Node APIs:
 ```js
 export default {
-	resolve: {
-		fallback: {
-			child_process: false,
-			crypto: false,
-			fs: false,
-			path: false
-		}
-	},
+    resolve: {
+        fallback: {
+            child_process: false,
+            crypto: false,
+            fs: false,
+            path: false
+        }
+    },
 };
 ```
