@@ -1,3 +1,4 @@
+*.html
 *.tgz
 
 libpluto-wasm-inlined.js

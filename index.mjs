@@ -1,4 +1,23 @@
-import libpluto from "./libpluto.js";
+const libpluto = new Promise(function(resolve)
+{
+	if (typeof window != "undefined")
+	{
+		const og_define = window.define;
+		window.define = function(_, f)
+		{
+			window.define = og_define;
+			resolve(f());
+		};
+		window.define.amd = true;
+	}
+	import("./libpluto.js").then(function(lib)
+	{
+		if ("default" in lib)
+		{
+			resolve(lib.default);
+		}
+	});
+});
 
 const opts = {};
 if (typeof __webpack_require__ == "function")
@@ -11,7 +30,7 @@ if (typeof __webpack_require__ == "function")
 		});
 	};
 }
-export const mod = await libpluto(opts);
+export const mod = await (await libpluto)(opts);
 
 export const malloc = mod.cwrap("malloc", "int", ["int"]);
 export const luaL_newstate = mod.cwrap("luaL_newstate", "int", []);
