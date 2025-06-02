@@ -47,5 +47,7 @@ export const luaL_unref = mod.cwrap("luaL_unref", "int", ["int", "int", "int"]);
 export const lua_next = mod.cwrap("lua_next", "int", ["int"]);
 export const lua_createtable = mod.cwrap("lua_createtable", "void", ["int", "int", "int"]);
 export const lua_settable = mod.cwrap("lua_settable", "void", ["int", "int"]);
+export const luaL_loadfilex = mod.cwrap("luaL_loadfilex", "int", ["int", "string", "int"]);
+export const lua_close = mod.cwrap("lua_close", "void", ["int"]);
 
 export const lua_pop = (L, n) => lua_settop(L, -(n)-1);
