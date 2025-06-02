@@ -1,4 +1,4 @@
-const libpluto = new Promise(function(resolve)
+const libpluto = new Promise(function(resolve, reject)
 {
 	if (typeof window != "undefined")
 	{
@@ -15,6 +15,10 @@ const libpluto = new Promise(function(resolve)
 		if ("default" in lib)
 		{
 			resolve(lib.default);
+		}
+		else if (typeof window == "undefined")
+		{
+			reject(new Error("Could not load Emscripten module"));
 		}
 	});
 });
