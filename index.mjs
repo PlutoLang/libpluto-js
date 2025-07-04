@@ -36,6 +36,13 @@ if (typeof __webpack_require__ == "function")
 }
 export const mod = await (await libpluto)(opts);
 
+export const LUA_OK = 0;
+export const LUA_YIELD = 1;
+export const LUA_ERRRUN = 2;
+export const LUA_ERRSYNTAX = 3;
+export const LUA_ERRMEM = 4;
+export const LUA_ERRERR = 5;
+
 export const malloc = mod.cwrap("malloc", "int", ["int"]);
 export const luaL_newstate = mod.cwrap("luaL_newstate", "int", []);
 export const luaL_openlibs = mod.cwrap("luaL_openlibs", "void", ["int"]);
