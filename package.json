@@ -6,5 +6,6 @@
 		"url": "git+https://github.com/PlutoLang/libpluto-js.git"
 	},
 	"type": "commonjs",
-	"main": "index.mjs"
+	"main": "index.mjs",
+	"license": "MIT"
 }
