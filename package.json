@@ -1,6 +1,6 @@
 {
 	"name": "libpluto",
-	"version": "0.11.1",
+	"version": "0.11.2",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/PlutoLang/libpluto-js.git"
