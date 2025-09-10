@@ -45,7 +45,8 @@ export const LUA_ERRERR = 5;
 
 export const malloc = mod.cwrap("malloc", "int", ["int"]);
 export const luaL_newstate = mod.cwrap("luaL_newstate", "int", []);
-export const luaL_openlibs = mod.cwrap("luaL_openlibs", "void", ["int"]);
+export const luaL_openselectedlibs = mod.cwrap("luaL_openselectedlibs", "int", ["int", "int", "int"]);
+export const luaL_openlibs = (L) => luaL_openselectedlibs(L, 1023, 0xffffffff);
 export const luaL_loadstring = mod.cwrap("luaL_loadstring", "int", ["int", "string"]);
 export const luaL_loadbufferx = mod.cwrap("luaL_loadbufferx", "int", ["int", "array", "int", "int", "int"]);
 export const lua_callk = mod.cwrap("lua_callk", "void", ["int", "int", "int", "int", "int"]);

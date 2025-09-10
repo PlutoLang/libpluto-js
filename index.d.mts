@@ -34,6 +34,7 @@ export const mod: LibPlutoModule;
 
 export const malloc: (size: number) => number;
 export const luaL_newstate: () => number;
+export const luaL_openselectedlibs: (L: number, load: number, preload: number) => void;
 export const luaL_openlibs: (L: number) => void;
 export const luaL_loadstring: (L: number, str: string) => number;
 export const luaL_loadbufferx: (
