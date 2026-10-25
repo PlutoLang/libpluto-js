@@ -1,10 +1,27 @@
 local bin = io.contents("libpluto.wasm")
 
---[[local arr = {}
-for i = 1, #bin do
-	arr:insert(bin:byte(i))
-end
-io.contents("libpluto-wasm-inlined.js", "module.exports={data:new Uint8Array(["..arr:concat(",").."])}")]]
-
+-- Inline wasm for webpack
 local { base64 } = require "*"
 io.contents("libpluto-wasm-inlined.js", 'module.exports={data:Uint8Array.from(atob("'..base64.encode(bin)..'"), c => c.charCodeAt(0))}')
+
+-- Index exports
+local exports = {}
+for line in io.lines("libpluto-wrapper.d.mts") do
+	if line:startswith("\treadonly ") then
+		exports:insert(line:sub(11):split(":")[1])
+	end
+end
+
+-- Provide exports in index.mjs
+do
+	local cont = io.contents("index.mjs")
+	local i = cont:find([[export const {]], 1, true)
+	io.contents("index.mjs", cont:sub(1, i - 1) .. "export const { "..exports:concat(", ").." } = wrapper(mod);\r\n")
+end
+
+-- Provide exports in index.d.mts
+io.contents("index.d.mts", [[import type { ILibplutoWrapper } from "./libpluto-wrapper.d.mts";
+
+export declare const mod: EmscriptenModule;
+
+]]..exports:mapped(|name| -> "export declare const "..name..": ILibplutoWrapper[\""..name.."\"];"):concat("\n"))

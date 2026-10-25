@@ -36,49 +36,5 @@ if (typeof __webpack_require__ == "function")
 }
 export const mod = await (await libpluto)(opts);
 
-export const LUA_OK = 0;
-export const LUA_YIELD = 1;
-export const LUA_ERRRUN = 2;
-export const LUA_ERRSYNTAX = 3;
-export const LUA_ERRMEM = 4;
-export const LUA_ERRERR = 5;
-
-export const malloc = mod.cwrap("malloc", "int", ["int"]);
-export const luaL_newstate = mod.cwrap("luaL_newstate", "int", []);
-export const luaL_openselectedlibs = mod.cwrap("luaL_openselectedlibs", "int", ["int", "int", "int"]);
-export const luaL_openlibs = (L) => luaL_openselectedlibs(L, 1023, 0xffffffff);
-export const luaL_loadstring = mod.cwrap("luaL_loadstring", "int", ["int", "string"]);
-export const luaL_loadbufferx = mod.cwrap("luaL_loadbufferx", "int", ["int", "array", "int", "int", "int"]);
-export const lua_callk = mod.cwrap("lua_callk", "void", ["int", "int", "int", "int", "int"]);
-export const lua_getglobal = mod.cwrap("lua_getglobal", "void", ["int", "string"]);
-export const lua_type = mod.cwrap("lua_type", "int", ["int", "int"]);
-export const lua_pushnil = mod.cwrap("lua_pushnil", "void", ["int"]);
-export const lua_pushstring = mod.cwrap("lua_pushstring", "void", ["int", "string"]);
-export const lua_pushlstring = mod.cwrap("lua_pushlstring", "void", ["int", "array", "int"]);
-export const lua_pushinteger = mod.cwrap("lua_pushinteger", "void", ["int", "int"]);
-export const lua_pushnumber = mod.cwrap("lua_pushnumber", "void", ["int", "number"]);
-export const lua_pushboolean = mod.cwrap("lua_pushboolean", "void", ["int", "int"]);
-export const lua_istrue = mod.cwrap("lua_istrue", "int", ["int", "int"]);
-export const lua_isinteger = mod.cwrap("lua_isinteger", "int", ["int", "int"]);
-export const lua_tolstring = mod.cwrap("lua_tolstring", "string", ["int", "int", "int"]);
-export const lua_tointegerx = mod.cwrap("lua_tointegerx", "int", ["int", "int", "int"]);
-export const lua_tonumberx = mod.cwrap("lua_tonumberx", "number", ["int", "int", "int"]);
-export const lua_settop = mod.cwrap("lua_settop", "void", ["int", "int"]);
-export const lua_setglobal = mod.cwrap("lua_setglobal", "void", ["int", "string"]);
-export const lua_newthread = mod.cwrap("lua_newthread", "int", ["int"]);
-export const lua_xmove = mod.cwrap("lua_xmove", "void", ["int", "int", "int"]);
-export const lua_closethread = mod.cwrap("lua_closethread", "void", ["int", "int"]);
-export const lua_status = mod.cwrap("lua_status", "int", ["int"]);
-export const lua_resume = mod.cwrap("lua_resume", "int", ["int", "int", "int", "int"]);
-export const lua_gettop = mod.cwrap("lua_gettop", "int", ["int"]);
-export const lua_pushvalue = mod.cwrap("lua_pushvalue", "int", ["int", "int"]);
-export const luaL_ref = mod.cwrap("luaL_ref", "int", ["int", "int"]);
-export const lua_rawgeti = mod.cwrap("lua_rawgeti", "void", ["int", "int", "int"]);
-export const luaL_unref = mod.cwrap("luaL_unref", "int", ["int", "int", "int"]);
-export const lua_next = mod.cwrap("lua_next", "int", ["int"]);
-export const lua_createtable = mod.cwrap("lua_createtable", "void", ["int", "int", "int"]);
-export const lua_settable = mod.cwrap("lua_settable", "void", ["int", "int"]);
-export const luaL_loadfilex = mod.cwrap("luaL_loadfilex", "int", ["int", "string", "int"]);
-export const lua_close = mod.cwrap("lua_close", "void", ["int"]);
-
-export const lua_pop = (L, n) => lua_settop(L, -(n)-1);
+import wrapper from "./libpluto-wrapper.mjs";
+export const { LUA_OK, LUA_YIELD, LUA_ERRRUN, LUA_ERRSYNTAX, LUA_ERRMEM, LUA_ERRERR, LUA_TNONE, LUA_TNIL, LUA_TBOOLEAN, LUA_TLIGHTUSERDATA, LUA_TNUMBER, LUA_TSTRING, LUA_TTABLE, LUA_TFUNCTION, LUA_TUSERDATA, LUA_TTHREAD, LUA_NUMTYPES, LUA_MULTRET, LUA_MINSTACK, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS, LUA_RIDX_MAINTHREAD, LUA_REFNIL, LUA_NOREF, LUA_OPADD, LUA_OPSUB, LUA_OPMUL, LUA_OPMOD, LUA_OPPOW, LUA_OPDIV, LUA_OPIDIV, LUA_OPBAND, LUA_OPBOR, LUA_OPBXOR, LUA_OPSHL, LUA_OPSHR, LUA_OPUNM, LUA_OPBNOT, LUA_OPEQ, LUA_OPLT, LUA_OPLE, LUA_GCSTOP, LUA_GCRESTART, LUA_GCCOLLECT, LUA_GCCOUNT, LUA_GCCOUNTB, LUA_GCSTEP, LUA_GCISRUNNING, LUA_GCGEN, LUA_GCINC, LUA_GCPARAM, malloc, luaL_newstate, luaL_openselectedlibs, luaL_openlibs, luaL_loadstring, luaL_loadbufferx, lua_callk, lua_pcallk, lua_getglobal, lua_type, lua_typename, lua_pushnil, lua_pushstring, lua_pushlstring, lua_pushinteger, lua_pushnumber, lua_pushboolean, lua_pushthread, lua_istrue, lua_isinteger, lua_isnumber, lua_isstring, lua_isuserdata, lua_iscfunction, lua_isyieldable, lua_toboolean, lua_tolstring, lua_tointegerx, lua_tonumberx, lua_version, lua_settop, lua_absindex, lua_checkstack, lua_rotate, lua_copy, lua_arith, lua_rawequal, lua_compare, lua_setglobal, lua_newthread, lua_xmove, lua_closethread, lua_status, lua_resume, lua_gettop, lua_pushvalue, lua_concat, lua_len, lua_stringtonumber, luaL_ref, lua_rawgeti, lua_rawseti, lua_rawget, lua_rawset, luaL_unref, lua_next, lua_createtable, lua_gettable, lua_settable, lua_getfield, lua_setfield, lua_geti, lua_seti, lua_getmetatable, lua_setmetatable, lua_toclose, lua_closeslot, luaL_loadfilex, lua_close, lua_call, lua_pcall, lua_pop, lua_newtable, lua_pushglobaltable, lua_upvalueindex, lua_tonumber, lua_tointeger, lua_tostring, lua_isnil, lua_isboolean, lua_istable, lua_isfunction, lua_isnone, lua_isnoneornil } = wrapper(mod);

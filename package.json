@@ -7,5 +7,11 @@
 	},
 	"type": "commonjs",
 	"main": "index.mjs",
-	"license": "MIT"
+	"license": "MIT",
+	"dependencies": {
+		"@types/emscripten": "^1.41.6"
+	},
+	"scripts": {
+		"test": "tsc --noEmit && node test.mts"
+	}
 }

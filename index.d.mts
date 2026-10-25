@@ -1,94 +1,139 @@
-// Generated via ChatGPT. May need some automation to generate it from the cwraps in the future. Or the other way around?
+import type { ILibplutoWrapper } from "./libpluto-wrapper.d.mts";
 
-export const LUA_OK: 0;
-export const LUA_YIELD: 1;
-export const LUA_ERRRUN: 2;
-export const LUA_ERRSYNTAX: 3;
-export const LUA_ERRMEM: 4;
-export const LUA_ERRERR: 5;
+export declare const mod: EmscriptenModule;
 
-export interface LibPlutoModule {
-  cwrap: <T extends (...args: any[]) => any>(
-    ident: string,
-    returnType: string,
-    argTypes: string[]
-  ) => T;
-
-  FS: {
-    open: (path: string, flags: string) => number | { fd: number };
-    write: (
-      stream: number | { fd: number },
-      buffer: Uint8Array,
-      offset: number,
-      length: number,
-      position: number
-    ) => number;
-    close: (stream: number | { fd: number }) => void;
-
-    writeFile: (path: string, data: Uint8Array | string, opts?: { encoding?: string; flags?: string }) => void;
-    readFile?: (path: string, opts?: { encoding?: 'utf8' | 'binary' }) => string | Uint8Array;
-    unlink?: (path: string) => void;
-  };
-}
-export const mod: LibPlutoModule;
-
-export const malloc: (size: number) => number;
-export const luaL_newstate: () => number;
-export const luaL_openselectedlibs: (L: number, load: number, preload: number) => void;
-export const luaL_openlibs: (L: number) => void;
-export const luaL_loadstring: (L: number, str: string) => number;
-export const luaL_loadbufferx: (
-  L: number,
-  buf: Uint8Array,
-  size: number,
-  name: number,
-  mode: number
-) => number;
-export const lua_callk: (
-  L: number,
-  nargs: number,
-  nresults: number,
-  ctx: number,
-  k: number
-) => void;
-export const lua_getglobal: (L: number, name: string) => void;
-export const lua_type: (L: number, idx: number) => number;
-export const lua_pushnil: (L: number) => void;
-export const lua_pushstring: (L: number, str: string) => void;
-export const lua_pushlstring: (L: number, str: Uint8Array, len: number) => void;
-export const lua_pushinteger: (L: number, n: number) => void;
-export const lua_pushnumber: (L: number, n: number) => void;
-export const lua_pushboolean: (L: number, b: number) => void;
-export const lua_istrue: (L: number, idx: number) => number;
-export const lua_isinteger: (L: number, idx: number) => number;
-export const lua_tolstring: (L: number, idx: number, lenPtr: number) => string;
-export const lua_tointegerx: (L: number, idx: number, isnum: number) => number;
-export const lua_tonumberx: (L: number, idx: number, isnum: number) => number;
-export const lua_settop: (L: number, idx: number) => void;
-export const lua_setglobal: (L: number, name: string) => void;
-export const lua_newthread: (L: number) => number;
-export const lua_xmove: (from: number, to: number, n: number) => void;
-export const lua_closethread: (L: number, thread: number) => void;
-export const lua_status: (L: number) => number;
-export const lua_resume: (
-  L: number,
-  from: number,
-  nargs: number,
-  ctx: number
-) => number;
-export const lua_gettop: (L: number) => number;
-export const lua_pushvalue: (L: number, idx: number) => number;
-export const luaL_ref: (L: number, t: number) => number;
-export const lua_rawgeti: (L: number, t: number, ref: number) => void;
-export const luaL_unref: (L: number, t: number, ref: number) => number;
-export const lua_next: (L: number) => number;
-export const lua_createtable: (L: number, narr: number, nrec: number) => void;
-export const lua_settable: (L: number, idx: number) => void;
-export const luaL_loadfilex: (
-  L: number,
-  filename: string,
-  mode: number
-) => number;
-export const lua_close: (L: number) => void;
-
-export const lua_pop: (L: number, n: number) => void;
+export declare const LUA_OK: ILibplutoWrapper["LUA_OK"];
+export declare const LUA_YIELD: ILibplutoWrapper["LUA_YIELD"];
+export declare const LUA_ERRRUN: ILibplutoWrapper["LUA_ERRRUN"];
+export declare const LUA_ERRSYNTAX: ILibplutoWrapper["LUA_ERRSYNTAX"];
+export declare const LUA_ERRMEM: ILibplutoWrapper["LUA_ERRMEM"];
+export declare const LUA_ERRERR: ILibplutoWrapper["LUA_ERRERR"];
+export declare const LUA_TNONE: ILibplutoWrapper["LUA_TNONE"];
+export declare const LUA_TNIL: ILibplutoWrapper["LUA_TNIL"];
+export declare const LUA_TBOOLEAN: ILibplutoWrapper["LUA_TBOOLEAN"];
+export declare const LUA_TLIGHTUSERDATA: ILibplutoWrapper["LUA_TLIGHTUSERDATA"];
+export declare const LUA_TNUMBER: ILibplutoWrapper["LUA_TNUMBER"];
+export declare const LUA_TSTRING: ILibplutoWrapper["LUA_TSTRING"];
+export declare const LUA_TTABLE: ILibplutoWrapper["LUA_TTABLE"];
+export declare const LUA_TFUNCTION: ILibplutoWrapper["LUA_TFUNCTION"];
+export declare const LUA_TUSERDATA: ILibplutoWrapper["LUA_TUSERDATA"];
+export declare const LUA_TTHREAD: ILibplutoWrapper["LUA_TTHREAD"];
+export declare const LUA_NUMTYPES: ILibplutoWrapper["LUA_NUMTYPES"];
+export declare const LUA_MULTRET: ILibplutoWrapper["LUA_MULTRET"];
+export declare const LUA_MINSTACK: ILibplutoWrapper["LUA_MINSTACK"];
+export declare const LUA_REGISTRYINDEX: ILibplutoWrapper["LUA_REGISTRYINDEX"];
+export declare const LUA_RIDX_GLOBALS: ILibplutoWrapper["LUA_RIDX_GLOBALS"];
+export declare const LUA_RIDX_MAINTHREAD: ILibplutoWrapper["LUA_RIDX_MAINTHREAD"];
+export declare const LUA_REFNIL: ILibplutoWrapper["LUA_REFNIL"];
+export declare const LUA_NOREF: ILibplutoWrapper["LUA_NOREF"];
+export declare const LUA_OPADD: ILibplutoWrapper["LUA_OPADD"];
+export declare const LUA_OPSUB: ILibplutoWrapper["LUA_OPSUB"];
+export declare const LUA_OPMUL: ILibplutoWrapper["LUA_OPMUL"];
+export declare const LUA_OPMOD: ILibplutoWrapper["LUA_OPMOD"];
+export declare const LUA_OPPOW: ILibplutoWrapper["LUA_OPPOW"];
+export declare const LUA_OPDIV: ILibplutoWrapper["LUA_OPDIV"];
+export declare const LUA_OPIDIV: ILibplutoWrapper["LUA_OPIDIV"];
+export declare const LUA_OPBAND: ILibplutoWrapper["LUA_OPBAND"];
+export declare const LUA_OPBOR: ILibplutoWrapper["LUA_OPBOR"];
+export declare const LUA_OPBXOR: ILibplutoWrapper["LUA_OPBXOR"];
+export declare const LUA_OPSHL: ILibplutoWrapper["LUA_OPSHL"];
+export declare const LUA_OPSHR: ILibplutoWrapper["LUA_OPSHR"];
+export declare const LUA_OPUNM: ILibplutoWrapper["LUA_OPUNM"];
+export declare const LUA_OPBNOT: ILibplutoWrapper["LUA_OPBNOT"];
+export declare const LUA_OPEQ: ILibplutoWrapper["LUA_OPEQ"];
+export declare const LUA_OPLT: ILibplutoWrapper["LUA_OPLT"];
+export declare const LUA_OPLE: ILibplutoWrapper["LUA_OPLE"];
+export declare const LUA_GCSTOP: ILibplutoWrapper["LUA_GCSTOP"];
+export declare const LUA_GCRESTART: ILibplutoWrapper["LUA_GCRESTART"];
+export declare const LUA_GCCOLLECT: ILibplutoWrapper["LUA_GCCOLLECT"];
+export declare const LUA_GCCOUNT: ILibplutoWrapper["LUA_GCCOUNT"];
+export declare const LUA_GCCOUNTB: ILibplutoWrapper["LUA_GCCOUNTB"];
+export declare const LUA_GCSTEP: ILibplutoWrapper["LUA_GCSTEP"];
+export declare const LUA_GCISRUNNING: ILibplutoWrapper["LUA_GCISRUNNING"];
+export declare const LUA_GCGEN: ILibplutoWrapper["LUA_GCGEN"];
+export declare const LUA_GCINC: ILibplutoWrapper["LUA_GCINC"];
+export declare const LUA_GCPARAM: ILibplutoWrapper["LUA_GCPARAM"];
+export declare const malloc: ILibplutoWrapper["malloc"];
+export declare const luaL_newstate: ILibplutoWrapper["luaL_newstate"];
+export declare const luaL_openselectedlibs: ILibplutoWrapper["luaL_openselectedlibs"];
+export declare const luaL_openlibs: ILibplutoWrapper["luaL_openlibs"];
+export declare const luaL_loadstring: ILibplutoWrapper["luaL_loadstring"];
+export declare const luaL_loadbufferx: ILibplutoWrapper["luaL_loadbufferx"];
+export declare const lua_callk: ILibplutoWrapper["lua_callk"];
+export declare const lua_pcallk: ILibplutoWrapper["lua_pcallk"];
+export declare const lua_getglobal: ILibplutoWrapper["lua_getglobal"];
+export declare const lua_type: ILibplutoWrapper["lua_type"];
+export declare const lua_typename: ILibplutoWrapper["lua_typename"];
+export declare const lua_pushnil: ILibplutoWrapper["lua_pushnil"];
+export declare const lua_pushstring: ILibplutoWrapper["lua_pushstring"];
+export declare const lua_pushlstring: ILibplutoWrapper["lua_pushlstring"];
+export declare const lua_pushinteger: ILibplutoWrapper["lua_pushinteger"];
+export declare const lua_pushnumber: ILibplutoWrapper["lua_pushnumber"];
+export declare const lua_pushboolean: ILibplutoWrapper["lua_pushboolean"];
+export declare const lua_pushthread: ILibplutoWrapper["lua_pushthread"];
+export declare const lua_istrue: ILibplutoWrapper["lua_istrue"];
+export declare const lua_isinteger: ILibplutoWrapper["lua_isinteger"];
+export declare const lua_isnumber: ILibplutoWrapper["lua_isnumber"];
+export declare const lua_isstring: ILibplutoWrapper["lua_isstring"];
+export declare const lua_isuserdata: ILibplutoWrapper["lua_isuserdata"];
+export declare const lua_iscfunction: ILibplutoWrapper["lua_iscfunction"];
+export declare const lua_isyieldable: ILibplutoWrapper["lua_isyieldable"];
+export declare const lua_toboolean: ILibplutoWrapper["lua_toboolean"];
+export declare const lua_tolstring: ILibplutoWrapper["lua_tolstring"];
+export declare const lua_tointegerx: ILibplutoWrapper["lua_tointegerx"];
+export declare const lua_tonumberx: ILibplutoWrapper["lua_tonumberx"];
+export declare const lua_version: ILibplutoWrapper["lua_version"];
+export declare const lua_settop: ILibplutoWrapper["lua_settop"];
+export declare const lua_absindex: ILibplutoWrapper["lua_absindex"];
+export declare const lua_checkstack: ILibplutoWrapper["lua_checkstack"];
+export declare const lua_rotate: ILibplutoWrapper["lua_rotate"];
+export declare const lua_copy: ILibplutoWrapper["lua_copy"];
+export declare const lua_arith: ILibplutoWrapper["lua_arith"];
+export declare const lua_rawequal: ILibplutoWrapper["lua_rawequal"];
+export declare const lua_compare: ILibplutoWrapper["lua_compare"];
+export declare const lua_setglobal: ILibplutoWrapper["lua_setglobal"];
+export declare const lua_newthread: ILibplutoWrapper["lua_newthread"];
+export declare const lua_xmove: ILibplutoWrapper["lua_xmove"];
+export declare const lua_closethread: ILibplutoWrapper["lua_closethread"];
+export declare const lua_status: ILibplutoWrapper["lua_status"];
+export declare const lua_resume: ILibplutoWrapper["lua_resume"];
+export declare const lua_gettop: ILibplutoWrapper["lua_gettop"];
+export declare const lua_pushvalue: ILibplutoWrapper["lua_pushvalue"];
+export declare const lua_concat: ILibplutoWrapper["lua_concat"];
+export declare const lua_len: ILibplutoWrapper["lua_len"];
+export declare const lua_stringtonumber: ILibplutoWrapper["lua_stringtonumber"];
+export declare const luaL_ref: ILibplutoWrapper["luaL_ref"];
+export declare const lua_rawgeti: ILibplutoWrapper["lua_rawgeti"];
+export declare const lua_rawseti: ILibplutoWrapper["lua_rawseti"];
+export declare const lua_rawget: ILibplutoWrapper["lua_rawget"];
+export declare const lua_rawset: ILibplutoWrapper["lua_rawset"];
+export declare const luaL_unref: ILibplutoWrapper["luaL_unref"];
+export declare const lua_next: ILibplutoWrapper["lua_next"];
+export declare const lua_createtable: ILibplutoWrapper["lua_createtable"];
+export declare const lua_gettable: ILibplutoWrapper["lua_gettable"];
+export declare const lua_settable: ILibplutoWrapper["lua_settable"];
+export declare const lua_getfield: ILibplutoWrapper["lua_getfield"];
+export declare const lua_setfield: ILibplutoWrapper["lua_setfield"];
+export declare const lua_geti: ILibplutoWrapper["lua_geti"];
+export declare const lua_seti: ILibplutoWrapper["lua_seti"];
+export declare const lua_getmetatable: ILibplutoWrapper["lua_getmetatable"];
+export declare const lua_setmetatable: ILibplutoWrapper["lua_setmetatable"];
+export declare const lua_toclose: ILibplutoWrapper["lua_toclose"];
+export declare const lua_closeslot: ILibplutoWrapper["lua_closeslot"];
+export declare const luaL_loadfilex: ILibplutoWrapper["luaL_loadfilex"];
+export declare const lua_close: ILibplutoWrapper["lua_close"];
+export declare const lua_call: ILibplutoWrapper["lua_call"];
+export declare const lua_pcall: ILibplutoWrapper["lua_pcall"];
+export declare const lua_pop: ILibplutoWrapper["lua_pop"];
+export declare const lua_newtable: ILibplutoWrapper["lua_newtable"];
+export declare const lua_pushglobaltable: ILibplutoWrapper["lua_pushglobaltable"];
+export declare const lua_upvalueindex: ILibplutoWrapper["lua_upvalueindex"];
+export declare const lua_tonumber: ILibplutoWrapper["lua_tonumber"];
+export declare const lua_tointeger: ILibplutoWrapper["lua_tointeger"];
+export declare const lua_tostring: ILibplutoWrapper["lua_tostring"];
+export declare const lua_isnil: ILibplutoWrapper["lua_isnil"];
+export declare const lua_isboolean: ILibplutoWrapper["lua_isboolean"];
+export declare const lua_istable: ILibplutoWrapper["lua_istable"];
+export declare const lua_isfunction: ILibplutoWrapper["lua_isfunction"];
+export declare const lua_isnone: ILibplutoWrapper["lua_isnone"];
+export declare const lua_isnoneornil: ILibplutoWrapper["lua_isnoneornil"];
