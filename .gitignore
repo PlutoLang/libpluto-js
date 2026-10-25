@@ -1,4 +1,6 @@
 node_modules/
+webpack-test/dist/
+!webpack-test/dist/index.html
 
 *.html
 *.tgz
