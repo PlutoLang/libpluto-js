@@ -28,9 +28,14 @@ This can also be imported on plain old websites:
 
 ## A note on webpack
 
-This library should work as-is with webpack, but your webpack config needs to specify that the Emscripten code doesn't need shims for Node APIs:
+This library can be used with webpack, it just needs some help:
 ```js
+import webpack from "webpack";
+
+export default {
+    // ...
     resolve: {
+        // The Emscripten code doesn't need shims for Node APIs
         fallback: {
             child_process: false,
             crypto: false,
@@ -38,10 +43,15 @@ This library should work as-is with webpack, but your webpack config needs to sp
             path: false
         }
     },
-```
-And you might also want to suppress the asset size warning:
-```js
+    plugins: [
+        // Fix for webpack treating "node:xyz" as a URI scheme and failing with UnhandledSchemeError
+        new webpack.NormalModuleReplacementPlugin(/^node:/, (resource) => {
+            resource.request = resource.request.replace(/^node:/, "");
+        }),
+    ],
     performance: {
-        maxAssetSize: 2_000_000
+        // Suppress the asset size warning
+        maxAssetSize: 4_000_000
     },
+};
 ````
