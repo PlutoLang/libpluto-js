@@ -1,5 +1,7 @@
 import type { ILibplutoModule, ILibplutoWrapper } from "./libpluto-wrapper.d.mts";
 
+export type { ILibplutoModule, ILibplutoWrapper } from "./libpluto-wrapper.d.mts";
+
 export declare const mod: ILibplutoModule;
 
 export declare const LUA_OK: ILibplutoWrapper["LUA_OK"];
