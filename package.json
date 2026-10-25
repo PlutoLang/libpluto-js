@@ -8,8 +8,8 @@
 	"type": "commonjs",
 	"main": "index.mjs",
 	"license": "MIT",
-	"dependencies": {
-		"@types/emscripten": "^1.41.6"
+	"devDependencies": {
+		"typescript": "^7.0.2"
 	},
 	"scripts": {
 		"test": "tsc --noEmit && node test.mts"
