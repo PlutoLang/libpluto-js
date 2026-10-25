@@ -1,3 +1,5 @@
+/// <reference types="emscripten" />
+
 import type { ILibplutoWrapper } from "./libpluto-wrapper.d.mts";
 
 export declare const mod: EmscriptenModule;
