@@ -4,3 +4,6 @@ webpack-test/
 *.tgz
 
 build.pluto
+
+test.mts
+tsconfig.json
