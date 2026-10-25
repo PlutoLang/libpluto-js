@@ -16,12 +16,12 @@ end
 do
 	local cont = io.contents("index.mjs")
 	local i = cont:find([[export const {]], 1, true)
-	io.contents("index.mjs", cont:sub(1, i - 1) .. "export const { "..exports:concat(", ").." } = wrapper(mod);\r\n")
+	io.contents("index.mjs", cont:sub(1, i - 1) .. "export const { "..exports:concat(", ").." } = wrapper(_mod);\r\n")
 end
 
 -- Provide exports in index.d.mts
 io.contents("index.d.mts", [[import type { ILibplutoWrapper } from "./libpluto-wrapper.d.mts";
 
-export declare const mod: EmscriptenModule;
+export type { ILibplutoModule, ILibplutoWrapper } from "./libpluto-wrapper.d.mts";
 
 ]]..exports:mapped(|name| -> "export declare const "..name..": ILibplutoWrapper[\""..name.."\"];"):concat("\n"))
